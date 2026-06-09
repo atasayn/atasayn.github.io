@@ -1,512 +1,1607 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Nildem Atasayar — Full-Stack Developer</title>
-<link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800;900&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nildem Atasayar — Full-Stack Developer</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800;900&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-:root {
-  --bg: #f7f6f3;
-  --bg2: #ffffff;
-  --surface: #f0ede8;
-  --surface2: #e8e4de;
-  --border: rgba(0,0,0,0.07);
-  --border2: rgba(0,0,0,0.13);
-  --text: #111110;
-  --text2: #3a3834;
-  --muted: #7a7670;
-  --muted2: #5a5652;
-  --accent: #1a6b4a;
-  --accent-light: #e8f5ee;
-  --accent-mid: #2d9c6e;
-  --accent-dim: rgba(26,107,74,0.08);
-  --accent-glow: rgba(26,107,74,0.12);
-  --font-display: 'Cabinet Grotesk', sans-serif;
-  --font-body: 'Instrument Sans', sans-serif;
-  --radius: 16px;
-  --radius-sm: 10px;
-  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.05);
-  --shadow-md: 0 2px 8px rgba(0,0,0,0.07), 0 12px 32px rgba(0,0,0,0.07);
-}
+    :root {
+      --bg: #f7f6f3;
+      --bg2: #ffffff;
+      --surface: #f0ede8;
+      --surface2: #e8e4de;
+      --border: rgba(0, 0, 0, 0.07);
+      --border2: rgba(0, 0, 0, 0.13);
+      --text: #111110;
+      --text2: #3a3834;
+      --muted: #7a7670;
+      --muted2: #5a5652;
+      --accent: #1a6b4a;
+      --accent-light: #e8f5ee;
+      --accent-mid: #2d9c6e;
+      --accent-dim: rgba(26, 107, 74, 0.08);
+      --accent-glow: rgba(26, 107, 74, 0.12);
+      --font-display: 'Cabinet Grotesk', sans-serif;
+      --font-body: 'Instrument Sans', sans-serif;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.07), 0 12px 32px rgba(0, 0, 0, 0.07);
+    }
 
-html { scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.7; overflow-x: hidden; }
+    html {
+      scroll-behavior: smooth;
+    }
 
-/* ── NAV ── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 3rem; height: 62px;
-  border-bottom: 1px solid var(--border);
-  background: rgba(247,246,243,0.88);
-  backdrop-filter: blur(16px);
-}
-.nav-logo { font-family: var(--font-display); font-weight: 900; font-size: 1rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em; display: flex; align-items: center; gap: 8px; }
-.nav-logo-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
-.nav-links { display: flex; gap: 0; list-style: none; }
-.nav-links a { font-size: 0.83rem; font-weight: 500; color: var(--muted); text-decoration: none; padding: 0.4rem 1rem; border-radius: 100px; transition: color 0.2s, background 0.2s; }
-.nav-links a:hover { color: var(--text); background: var(--surface); }
-.nav-links a.active { color: var(--accent); }
-.nav-cta { font-family: var(--font-body); font-size: 0.83rem; font-weight: 500; padding: 0.45rem 1.2rem; border-radius: 100px; background: var(--text); color: #fff; text-decoration: none; transition: background 0.2s; }
-.nav-cta:hover { background: var(--text2); }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
 
-/* ── HERO ── */
-#hero {
-  display: grid;
-  grid-template-columns: 1fr 420px;
-  align-items: center;
-  padding: 8rem 3rem 5rem;
-  gap: 0;
-  position: relative; overflow: hidden;
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border);
-}
-.hero-left { padding-right: 4rem; }
-.hero-badge { display: inline-flex; align-items: center; gap: 7px; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(26,107,74,0.2); background: var(--accent-light); padding: 5px 14px; border-radius: 100px; margin-bottom: 1.8rem; animation: fadeUp 0.5s ease both; }
-.hero-badge-pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s ease-in-out infinite; }
-.hero-name { font-family: var(--font-display); font-size: clamp(3.2rem, 6vw, 5.5rem); font-weight: 900; line-height: 0.92; letter-spacing: -0.04em; color: var(--text); animation: fadeUp 0.5s 0.08s ease both; }
-.hero-name em { font-style: normal; color: var(--accent); display: block; }
-.hero-role { margin-top: 1.5rem; font-size: 1rem; font-weight: 500; color: var(--muted2); animation: fadeUp 0.5s 0.15s ease both; }
-.hero-desc { margin-top: 0.75rem; max-width: 440px; font-size: 0.95rem; color: var(--muted); line-height: 1.8; animation: fadeUp 0.5s 0.2s ease both; }
-.hero-actions { margin-top: 2rem; display: flex; gap: 0.75rem; flex-wrap: wrap; animation: fadeUp 0.5s 0.27s ease both; }
-.hero-tags { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 6px; animation: fadeUp 0.5s 0.33s ease both; }
-.hero-tag { font-size: 0.72rem; font-weight: 500; padding: 4px 11px; border-radius: 100px; background: var(--surface); color: var(--muted2); border: 1px solid var(--border); }
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      height: 62px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(247, 246, 243, 0.88);
+      backdrop-filter: blur(16px);
+    }
 
-/* ── HERO RIGHT — photo panel ── */
-.hero-right {
-  height: 100%;
-  min-height: 500px;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  border-left: 1px solid var(--border);
-  animation: fadeUp 0.5s 0.1s ease both;
-}
-.photo-top {
-  flex: 1;
-  background: var(--surface);
-  display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden;
-  min-height: 320px;
-}
-.photo-top::before {
-  content: '';
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse 80% 80% at 50% 50%, rgba(26,107,74,0.06) 0%, transparent 70%),
-    repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(0,0,0,0.018) 18px, rgba(0,0,0,0.018) 19px);
-}
-.photo-placeholder-wrap {
-  position: relative; z-index: 1;
-  display: flex; flex-direction: column; align-items: center; gap: 10px;
-  text-align: center;
-}
-.photo-circle {
-  width: 110px; height: 110px; border-radius: 50%;
-  background: var(--bg2);
-  border: 2px dashed rgba(26,107,74,0.25);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 2.8rem;
-  color: rgba(26,107,74,0.2);
-  margin-bottom: 4px;
-}
-.photo-hint { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.04em; }
-.photo-hint strong { display: block; font-size: 0.8rem; color: var(--muted2); font-weight: 500; margin-bottom: 2px; }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-/* Stats row below photo */
-.hero-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border-top: 1px solid var(--border);
-}
-.hero-stat {
-  padding: 1.25rem 1.5rem;
-  border-right: 1px solid var(--border);
-  display: flex; flex-direction: column; gap: 3px;
-}
-.hero-stat:last-child { border-right: none; }
-.hero-stat:nth-child(3), .hero-stat:nth-child(4) { border-top: 1px solid var(--border); }
-.stat-val { font-family: var(--font-display); font-size: 1.5rem; font-weight: 900; color: var(--text); letter-spacing: -0.03em; }
-.stat-lbl { font-size: 0.73rem; color: var(--muted); font-weight: 400; }
+    .nav-logo-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
 
-/* Buttons */
-.btn-p { display: inline-flex; align-items: center; gap: 7px; background: var(--text); color: #fff; font-family: var(--font-body); font-size: 0.875rem; font-weight: 500; padding: 0.75rem 1.6rem; border-radius: 100px; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s, transform 0.2s, box-shadow 0.2s; }
-.btn-p:hover { background: var(--text2); transform: translateY(-1px); box-shadow: var(--shadow-md); }
-.btn-s { display: inline-flex; align-items: center; gap: 7px; background: transparent; color: var(--text2); font-family: var(--font-body); font-size: 0.875rem; font-weight: 400; padding: 0.75rem 1.6rem; border-radius: 100px; text-decoration: none; border: 1px solid var(--border2); cursor: pointer; transition: border-color 0.2s, background 0.2s; }
-.btn-s:hover { background: var(--surface); }
+    .nav-links {
+      display: flex;
+      gap: 0;
+      list-style: none;
+    }
 
-/* ── SECTION SHARED ── */
-section { padding: 6rem 3rem; position: relative; z-index: 1; }
-.section-eyebrow { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 8px; }
-.section-eyebrow::before { content: ''; width: 18px; height: 1.5px; background: var(--accent); border-radius: 2px; opacity: 0.5; }
-.section-title { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; color: var(--text); margin-bottom: 0.6rem; }
-.section-sub { font-size: 0.93rem; color: var(--muted); max-width: 480px; margin-bottom: 2.75rem; line-height: 1.8; }
+    .nav-links a {
+      font-size: 0.83rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      transition: color 0.2s, background 0.2s;
+    }
 
-/* ── SERVICES ── */
-#services { background: var(--bg); }
-.services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
-.svc-card { background: var(--bg2); padding: 1.75rem; display: flex; flex-direction: column; gap: 0.8rem; transition: background 0.2s; }
-.svc-card:hover { background: var(--accent-light); }
-.svc-card:hover .svc-num { color: var(--accent); }
-.svc-num { font-family: var(--font-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; color: #ccc; transition: color 0.2s; }
-.svc-title { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; color: var(--text); line-height: 1.3; }
-.svc-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.75; flex: 1; }
-.svc-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 0.25rem; }
-.tag { font-size: 0.67rem; font-weight: 500; padding: 2px 9px; border-radius: 100px; background: var(--surface); color: var(--muted2); border: 1px solid var(--border); }
-.ai-strip { margin-top: 1.25rem; display: flex; align-items: center; gap: 12px; padding: 1rem 1.5rem; border: 1px solid rgba(26,107,74,0.15); border-radius: var(--radius-sm); background: var(--accent-light); }
-.ai-strip-icon { font-size: 1rem; flex-shrink: 0; color: var(--accent); }
-.ai-strip p { font-size: 0.83rem; color: var(--muted2); line-height: 1.6; }
-.ai-strip strong { color: var(--text2); font-weight: 500; }
+    .nav-links a:hover {
+      color: var(--text);
+      background: var(--surface);
+    }
 
-/* ── WORK ── */
-#work { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.work-project { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 1.5rem; box-shadow: var(--shadow); background: var(--bg2); transition: box-shadow 0.2s; }
-.work-project:hover { box-shadow: var(--shadow-md); }
-.project-header { display: grid; grid-template-columns: auto 1fr auto; gap: 1.5rem; align-items: center; padding: 1.5rem 1.75rem; cursor: pointer; }
-.project-cover { width: 68px; height: 50px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); background: var(--surface); flex-shrink: 0; display: flex; align-items: center; justify-content: center; padding: 6px; }
-.project-cover img { width: 100%; height: 100%; object-fit: contain; }
-.project-name { font-family: var(--font-display); font-size: 1.02rem; font-weight: 700; color: var(--text); margin-bottom: 3px; }
-.project-org { font-size: 0.78rem; color: var(--muted); display: flex; align-items: center; gap: 6px; }
-.project-org-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
-.project-toggle { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 1rem; line-height: 1; transition: transform 0.3s, background 0.2s, color 0.2s; flex-shrink: 0; }
-.work-project.open .project-toggle { transform: rotate(45deg); background: var(--accent-light); color: var(--accent); border-color: rgba(26,107,74,0.2); }
-.project-body { display: none; border-top: 1px solid var(--border); }
-.work-project.open .project-body { display: block; }
-.project-summary { padding: 1.5rem 1.75rem; background: var(--surface); border-bottom: 1px solid var(--border); }
-.project-summary p { font-size: 0.9rem; color: var(--muted2); line-height: 1.8; }
-.project-summary a { color: var(--accent); text-decoration: none; font-weight: 500; }
-.project-summary a:hover { text-decoration: underline; }
-.project-children { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
-.child-card { background: var(--bg2); padding: 1.5rem; display: flex; flex-direction: column; gap: 0.55rem; transition: background 0.2s; }
-.child-card:hover { background: var(--accent-light); }
-.child-icon { font-size: 1.2rem; }
-.child-title { font-family: var(--font-display); font-size: 0.88rem; font-weight: 700; color: var(--text); }
-.child-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.72; flex: 1; }
-.child-badge { margin-top: 0.3rem; display: inline-flex; align-items: center; gap: 5px; font-size: 0.68rem; font-weight: 500; color: var(--accent); }
-.child-badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
-.work-more { margin-top: 0.5rem; padding: 1.25rem 1.75rem; border: 1px dashed var(--border2); border-radius: var(--radius); text-align: center; }
-.work-more p { font-size: 0.82rem; color: var(--muted); }
+    .nav-links a.active {
+      color: var(--accent);
+    }
 
-/* ── ABOUT ── */
-#about { background: var(--bg); }
-.about-layout { display: grid; grid-template-columns: 1fr 340px; gap: 4rem; align-items: start; }
-.about-bio p { font-size: 0.97rem; color: var(--muted2); line-height: 1.9; margin-bottom: 1.2rem; }
-.about-bio p strong { color: var(--text); font-weight: 500; }
-.about-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
-.about-row { padding: 1rem 1.4rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); transition: background 0.2s; }
-.about-row:last-child { border-bottom: none; }
-.about-row:hover { background: var(--surface); }
-.row-label { font-size: 0.78rem; color: var(--muted); }
-.row-val { font-family: var(--font-display); font-size: 0.82rem; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 6px; }
-.row-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    .nav-cta {
+      font-family: var(--font-body);
+      font-size: 0.83rem;
+      font-weight: 500;
+      padding: 0.45rem 1.2rem;
+      border-radius: 100px;
+      background: var(--text);
+      color: #fff;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
 
-/* ── CONTACT ── */
-#contact { background: var(--bg2); border-top: 1px solid var(--border); }
-.contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
-.contact-desc { font-size: 0.93rem; color: var(--muted); line-height: 1.85; margin-bottom: 2rem; }
-.contact-form { display: flex; flex-direction: column; gap: 0.85rem; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
-.form-group { display: flex; flex-direction: column; gap: 5px; }
-.form-group label { font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
-.form-group input, .form-group textarea { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.8rem 1rem; color: var(--text); font-family: var(--font-body); font-size: 0.9rem; outline: none; resize: none; transition: border-color 0.2s, background 0.2s; }
-.form-group input:focus, .form-group textarea:focus { border-color: rgba(26,107,74,0.4); background: var(--bg2); }
-.form-group input::placeholder, .form-group textarea::placeholder { color: #b8b4ae; }
-.contact-info { display: flex; flex-direction: column; gap: 0.85rem; padding-top: 0.5rem; }
-.info-card { display: flex; align-items: flex-start; gap: 12px; padding: 1.2rem 1.4rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); transition: border-color 0.2s, background 0.2s; }
-.info-card:hover { border-color: var(--border2); background: var(--bg2); }
-.info-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
-.info-label { font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
-.info-val { font-size: 0.88rem; color: var(--text2); font-weight: 500; }
-.avail-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-right: 5px; animation: pulse 2s ease-in-out infinite; }
+    .nav-cta:hover {
+      background: var(--text2);
+    }
 
-/* ── FOOTER ── */
-footer { padding: 1.6rem 3rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: var(--bg); position: relative; z-index: 1; }
-.footer-l { font-size: 0.78rem; color: var(--muted); }
-.footer-l span { color: var(--accent); font-weight: 500; }
-.footer-r { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--muted); }
+    /* ── HERO ── */
+    #hero {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      align-items: center;
+      padding: 8rem 3rem 5rem;
+      gap: 0;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+    }
 
-/* ── ANIMATIONS ── */
-@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
-.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.d1 { transition-delay: 0.07s; } .d2 { transition-delay: 0.14s; } .d3 { transition-delay: 0.21s; }
+    .hero-left {
+      padding-right: 4rem;
+    }
 
-/* ── RESPONSIVE ── */
-@media (max-width: 1100px) {
-  .services-grid { grid-template-columns: repeat(2, 1fr); }
-  .project-children { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 900px) {
-  #hero { grid-template-columns: 1fr; }
-  .hero-right { display: none; }
-  .about-layout { grid-template-columns: 1fr; }
-  .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
-}
-@media (max-width: 700px) {
-  nav { padding: 0 1.5rem; }
-  .nav-links { display: none; }
-  section { padding: 4rem 1.5rem; }
-  #hero { padding: 7rem 1.5rem 4rem; }
-  .services-grid { grid-template-columns: 1fr; }
-  .project-children { grid-template-columns: 1fr; }
-  .form-row { grid-template-columns: 1fr; }
-  footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
-}
-</style>
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(26, 107, 74, 0.2);
+      background: var(--accent-light);
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 1.8rem;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .hero-badge-pulse {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(3.2rem, 6vw, 5.5rem);
+      font-weight: 900;
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      animation: fadeUp 0.5s 0.08s ease both;
+    }
+
+    .hero-name em {
+      font-style: normal;
+      color: var(--accent);
+      display: block;
+    }
+
+    .hero-role {
+      margin-top: 1.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--muted2);
+      animation: fadeUp 0.5s 0.15s ease both;
+    }
+
+    .hero-desc {
+      margin-top: 0.75rem;
+      max-width: 440px;
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.8;
+      animation: fadeUp 0.5s 0.2s ease both;
+    }
+
+    .hero-actions {
+      margin-top: 2rem;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.5s 0.27s ease both;
+    }
+
+    .hero-tags {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      animation: fadeUp 0.5s 0.33s ease both;
+    }
+
+    .hero-tag {
+      font-size: 0.72rem;
+      font-weight: 500;
+      padding: 4px 11px;
+      border-radius: 100px;
+      background: var(--surface);
+      color: var(--muted2);
+      border: 1px solid var(--border);
+    }
+
+    /* ── HERO RIGHT — photo panel ── */
+    .hero-right {
+      height: 100%;
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      border-left: 1px solid var(--border);
+      animation: fadeUp 0.5s 0.1s ease both;
+    }
+
+    .photo-top {
+      flex: 1;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      min-height: 320px;
+    }
+
+    .photo-top::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 80% at 50% 50%, rgba(26, 107, 74, 0.06) 0%, transparent 70%),
+        repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(0, 0, 0, 0.018) 18px, rgba(0, 0, 0, 0.018) 19px);
+    }
+
+    .photo-placeholder-wrap {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      text-align: center;
+    }
+
+    .photo-circle {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: var(--bg2);
+      border: 2px dashed rgba(26, 107, 74, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      color: rgba(26, 107, 74, 0.2);
+      margin-bottom: 4px;
+    }
+
+    .photo-hint {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .photo-hint strong {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--muted2);
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    /* Stats row below photo */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--border);
+    }
+
+    .hero-stat {
+      padding: 1.25rem 1.5rem;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .hero-stat:last-child {
+      border-right: none;
+    }
+
+    .hero-stat:nth-child(3),
+    .hero-stat:nth-child(4) {
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-val {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -0.03em;
+    }
+
+    .stat-lbl {
+      font-size: 0.73rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    /* Buttons */
+    .btn-p {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--text);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.75rem 1.6rem;
+      border-radius: 100px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-p:hover {
+      background: var(--text2);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-s {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: transparent;
+      color: var(--text2);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 400;
+      padding: 0.75rem 1.6rem;
+      border-radius: 100px;
+      text-decoration: none;
+      border: 1px solid var(--border2);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-s:hover {
+      background: var(--surface);
+    }
+
+    /* ── SECTION SHARED ── */
+    section {
+      padding: 6rem 3rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-eyebrow::before {
+      content: '';
+      width: 18px;
+      height: 1.5px;
+      background: var(--accent);
+      border-radius: 2px;
+      opacity: 0.5;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-sub {
+      font-size: 0.93rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 2.75rem;
+      line-height: 1.8;
+    }
+
+    /* ── SERVICES ── */
+    #services {
+      background: var(--bg2);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .svc-card {
+      background: var(--bg2);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      transition: background 0.2s;
+    }
+
+    .svc-card:hover {
+      background: var(--accent-light);
+    }
+
+    .svc-card:hover .svc-num {
+      color: var(--accent);
+    }
+
+    .svc-num {
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #ccc;
+      transition: color 0.2s;
+    }
+
+    .svc-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .svc-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.75;
+      flex: 1;
+    }
+
+    .svc-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 0.25rem;
+    }
+
+    .tag {
+      font-size: 0.67rem;
+      font-weight: 500;
+      padding: 2px 9px;
+      border-radius: 100px;
+      background: var(--surface);
+      color: var(--muted2);
+      border: 1px solid var(--border);
+    }
+
+    .ai-strip {
+      margin-top: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 1rem 1.5rem;
+      border: 1px solid rgba(26, 107, 74, 0.15);
+      border-radius: var(--radius-sm);
+      background: var(--accent-light);
+    }
+
+    .ai-strip-icon {
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: var(--accent);
+    }
+
+    .ai-strip p {
+      font-size: 0.83rem;
+      color: var(--muted2);
+      line-height: 1.6;
+    }
+
+    .ai-strip strong {
+      color: var(--text2);
+      font-weight: 500;
+    }
+
+    /* ── WORK ── */
+    #work {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .work-project {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow);
+      background: var(--bg2);
+      transition: box-shadow 0.2s;
+    }
+
+    .work-project:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .project-header {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      padding: 1.5rem 1.75rem;
+      cursor: pointer;
+    }
+
+    .project-cover {
+      width: 68px;
+      height: 50px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+    }
+
+    .project-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .project-name {
+      font-family: var(--font-display);
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* ── PROJECT LINK ── */
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-light);
+      border: 1px solid rgba(26, 107, 74, 0.18);
+      padding: 2px 9px 2px 8px;
+      border-radius: 100px;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: background 0.18s, border-color 0.18s, color 0.18s;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+
+    .project-link:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .project-link svg {
+      flex-shrink: 0;
+      opacity: 0.75;
+      transition: opacity 0.18s;
+    }
+
+    .project-link:hover svg {
+      opacity: 1;
+    }
+
+    .project-org {
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .project-org-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .project-toggle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--border2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1;
+      transition: transform 0.3s, background 0.2s, color 0.2s;
+      flex-shrink: 0;
+    }
+
+    .work-project.open .project-toggle {
+      transform: rotate(45deg);
+      background: var(--accent-light);
+      color: var(--accent);
+      border-color: rgba(26, 107, 74, 0.2);
+    }
+
+    .project-body {
+      display: none;
+      border-top: 1px solid var(--border);
+    }
+
+    .work-project.open .project-body {
+      display: block;
+    }
+
+    .project-summary {
+      padding: 1.5rem 1.75rem;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-summary p {
+      font-size: 0.9rem;
+      color: var(--muted2);
+      line-height: 1.8;
+    }
+
+    .project-summary a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .project-summary a:hover {
+      text-decoration: underline;
+    }
+
+    .project-children {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .child-card {
+      background: var(--bg2);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      transition: background 0.2s;
+    }
+
+    .child-card:hover {
+      background: var(--accent-light);
+    }
+
+    .child-icon {
+      font-size: 1.2rem;
+    }
+
+    .child-title {
+      font-family: var(--font-display);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .child-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.72;
+      flex: 1;
+    }
+
+    .child-badge {
+      margin-top: 0.3rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.68rem;
+      font-weight: 500;
+      color: var(--accent);
+    }
+
+    .child-badge::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .work-more {
+      margin-top: 0.5rem;
+      padding: 1.25rem 1.75rem;
+      border: 1px dashed var(--border2);
+      border-radius: var(--radius);
+      text-align: center;
+    }
+
+    .work-more p {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--bg);
+    }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-bio p {
+      font-size: 0.97rem;
+      color: var(--muted2);
+      line-height: 1.9;
+      margin-bottom: 1.2rem;
+    }
+
+    .about-bio p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .about-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .about-row {
+      padding: 1rem 1.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+    .about-row:last-child {
+      border-bottom: none;
+    }
+
+    .about-row:hover {
+      background: var(--surface);
+    }
+
+    .row-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .row-val {
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .row-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-desc {
+      font-size: 0.93rem;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 2rem;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .form-group label {
+      font-size: 0.72rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.8rem 1rem;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      outline: none;
+      resize: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: rgba(26, 107, 74, 0.4);
+      background: var(--bg2);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #b8b4ae;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      padding-top: 0.5rem;
+    }
+
+    .info-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 1.2rem 1.4rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .info-card:hover {
+      border-color: var(--border2);
+      background: var(--bg2);
+    }
+
+    .info-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .info-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .info-val {
+      font-size: 0.88rem;
+      color: var(--text2);
+      font-weight: 500;
+    }
+
+    .avail-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-right: 5px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 1.6rem 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg);
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-l {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .footer-l span {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .footer-r {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.45;
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .d1 {
+      transition-delay: 0.07s;
+    }
+
+    .d2 {
+      transition-delay: 0.14s;
+    }
+
+    .d3 {
+      transition-delay: 0.21s;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .project-children {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 900px) {
+      #hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-right {
+        display: none;
+      }
+
+      .about-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
+    @media (max-width: 700px) {
+      nav {
+        padding: 0 1.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      section {
+        padding: 4rem 1.5rem;
+      }
+
+      #hero {
+        padding: 7rem 1.5rem 4rem;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-children {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        padding: 1.5rem;
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- NAV -->
-<nav>
-  <a class="nav-logo" href="#hero">
-    <div class="nav-logo-dot"></div>
-    Nildem Atasayar
-  </a>
-  <ul class="nav-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="#contact" class="nav-cta">Hire me</a>
-</nav>
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#hero">
+      <div class="nav-logo-dot"></div>
+      Nildem Atasayar
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Hire me</a>
+  </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-left">
-    <div class="hero-badge"><div class="hero-badge-pulse"></div> Available for projects</div>
-    <h1 class="hero-name">Nildem Atasayar</em></h1>
-    <p class="hero-role">Full-Stack Developer · Freiburg, Germany</p>
-    <p class="hero-desc">Building modern web applications — from database architecture to polished user interfaces — with a focus on clean code and real-world impact.</p>
-    <div class="hero-actions">
-      <a href="#work" class="btn-p">View my work ↓</a>
-      <a href="#contact" class="btn-s">Get in touch</a>
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <div class="hero-badge-pulse"></div> Available for projects
+      </div>
+      <h1 class="hero-name">Nildem Atasayar</em></h1>
+      <p class="hero-role">Full-Stack Developer · Freiburg, Germany</p>
+      <div class="hero-actions">
+        <a href="#work" class="btn-p">View my work ↓</a>
+        <a href="#contact" class="btn-s">Get in touch</a>
+      </div>
     </div>
-    <div class="hero-tags">
-      <span class="hero-tag">C# / .NET</span>
-      <span class="hero-tag">React</span>
-      <span class="hero-tag">MySQL</span>
-      <span class="hero-tag">Python</span>
-      <span class="hero-tag">Docker</span>
-      <span class="hero-tag">CI/CD</span>
-      <span class="hero-tag">REST APIs</span>
-    </div>
-  </div>
 
-  <div class="hero-right">
-    <div class="photo-top">
-      
-      <img src="images/XM7A6441_resized.jpg" style="width:100%;height:100%;object-fit:cover;" alt="Nildem Atasayar" />
-    
-      <div class="photo-placeholder-wrap">
+    <div class="hero-right">
+      <div class="photo-top">
 
-      </div>
-    </div>
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="stat-val">3+</div>
-        <div class="stat-lbl">Years experience</div>
-      </div>
-      <div class="hero-stat">
-        <div class="stat-val">8</div>
-        <div class="stat-lbl">Services offered</div>
-      </div>
-      <div class="hero-stat">
-        <div class="stat-val">5+</div>
-        <div class="stat-lbl">Tech stacks</div>
-      </div>
-      <div class="hero-stat">
-        <div class="stat-val">🌍</div>
-        <div class="stat-lbl">International env.</div>
-      </div>
-    </div>
-  </div>
-</section>
+        <img src="images/XM7A6441_resized.jpg" style="width:100%;height:100%;object-fit:cover;" alt="Nildem Atasayar" />
 
-<!-- SERVICES -->
-<section id="services">
-  <div class="section-eyebrow">What I offer</div>
-  <h2 class="section-title reveal">Services</h2>
-  <p class="section-sub reveal d1">A full-stack skill set — from UI to infrastructure.</p>
-  <div class="services-grid reveal d2">
-    <div class="svc-card"><div class="svc-num">01</div><div class="svc-title">Frontend Development</div><p class="svc-desc">Responsive, user-friendly interfaces focused on usability and visual consistency.</p><div class="svc-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">React</span></div></div>
-    <div class="svc-card"><div class="svc-num">02</div><div class="svc-title">Backend Development</div><p class="svc-desc">Robust server-side applications handling data flow, authentication, and application structure.</p><div class="svc-tags"><span class="tag">C#</span><span class="tag">.NET</span><span class="tag">Server-side Logic</span></div></div>
-    <div class="svc-card"><div class="svc-num">03</div><div class="svc-title">Database Integration</div><p class="svc-desc">Designing and integrating MySQL relational databases for reliable, scalable data management.</p><div class="svc-tags"><span class="tag">MySQL</span><span class="tag">Relational DB</span></div></div>
-    <div class="svc-card"><div class="svc-num">04</div><div class="svc-title">Microservices & Architecture</div><p class="svc-desc">Independently deployable services across different stacks within larger backend systems.</p><div class="svc-tags"><span class="tag">Python</span><span class="tag">Microservices</span><span class="tag">REST APIs</span></div></div>
-    <div class="svc-card"><div class="svc-num">05</div><div class="svc-title">API & Service Integration</div><p class="svc-desc">Connecting server-side and client-side systems, including web and REST services.</p><div class="svc-tags"><span class="tag">REST APIs</span><span class="tag">Web Services</span></div></div>
-    <div class="svc-card"><div class="svc-num">06</div><div class="svc-title">DevOps & Deployment</div><p class="svc-desc">Streamlining delivery with Docker containerisation and CI/CD pipelines.</p><div class="svc-tags"><span class="tag">Docker</span><span class="tag">CI/CD</span></div></div>
-    <div class="svc-card"><div class="svc-num">07</div><div class="svc-title">Workflow Automation</div><p class="svc-desc">Custom software solutions that reduce manual tasks and improve team efficiency.</p><div class="svc-tags"><span class="tag">Automation</span><span class="tag">Custom Tools</span></div></div>
-    <div class="svc-card"><div class="svc-num">08</div><div class="svc-title">Technical Support & Maintenance</div><p class="svc-desc">Keeping websites and databases running smoothly for stakeholders and institutions.</p><div class="svc-tags"><span class="tag">Troubleshooting</span><span class="tag">Maintenance</span></div></div>
-  </div>
-  <div class="ai-strip reveal d3">
-    <div class="ai-strip-icon">✦</div>
-    <p>I integrate AI tools such as <strong>Claude</strong> and <strong>Codex</strong> into my development workflow to accelerate problem-solving, improve code quality, and deliver solutions more efficiently.</p>
-  </div>
-</section>
+        <div class="photo-placeholder-wrap">
 
-<!-- WORK -->
-<section id="work">
-  <div class="section-eyebrow">Projects</div>
-  <h2 class="section-title reveal">Work</h2>
-  <p class="section-sub reveal d1">Real-world projects I've built and maintained.</p>
-
-  <div class="work-project reveal d2" id="proj-iedc">
-    <div class="project-header" onclick="toggleProject('proj-iedc')">
-      <div class="project-cover">
-        <img src="https://www.database.industrialecology.uni-freiburg.de/resources/IEF_LogoV_23_3.png" alt="IEDC Logo" onerror="this.parentElement.innerHTML='🏛'" />
-      </div>
-      <div class="project-meta">
-        <div class="project-name">IEDC — Industrial Ecology Data Commons</div>
-        <div class="project-org"><span class="project-org-dot"></span>University of Freiburg · IT Department · 2022 – ongoing</div>
-      </div>
-      <div class="project-toggle">+</div>
-    </div>
-    <div class="project-body">
-      <div class="project-summary">
-        <p>The <a href="https://www.database.industrialecology.uni-freiburg.de/" target="_blank">IEDC</a> is an open science database portal for industrial ecology and socio-metabolic research at the University of Freiburg, hosting 400+ datasets for researchers and institutions worldwide. I contributed across the full stack — from database architecture and backend services to the web interface, search features, deployment, and day-to-day technical support.</p>
-      </div>
-      <div class="project-children">
-        <div class="child-card"><div class="child-icon">🗄️</div><div class="child-title">Database Architecture & Backend</div><p class="child-desc">Maintained and improved the relational database structure powering the IEDC, including dataset tables, lookup tables, classification systems, and data integrity constraints.</p><div class="child-badge">MySQL · .NET Backend</div></div>
-        <div class="child-card"><div class="child-icon">🖥️</div><div class="child-title">Web Interface Development</div><p class="child-desc">Developed and maintained frontend and backend components of the IEDC web application, including data browsing views, catalogue pages, and the portal interface used by international researchers.</p><div class="child-badge">C# · HTML · CSS · JavaScript</div></div>
-        <div class="child-card"><div class="child-icon">🔍</div><div class="child-title">Search & Filter Features</div><p class="child-desc">Worked on the database-driven search and filter system, enabling users to query datasets by keyword, data type, material, region, and multiple aspects.</p><div class="child-badge">REST APIs · SQL Queries</div></div>
-        <div class="child-card"><div class="child-icon">📤</div><div class="child-title">Data Upload & Validation</div><p class="child-desc">Supported the data template validation workflow allowing community users to validate and submit datasets against the IEDC data model standards.</p><div class="child-badge">Data Pipeline · Validation</div></div>
-        <div class="child-card"><div class="child-icon">🚀</div><div class="child-title">Server & Deployment</div><p class="child-desc">Managed server infrastructure and deployment processes, applying CI/CD pipelines and containerisation practices to ensure reliable, consistent releases.</p><div class="child-badge">Docker · CI/CD · DevOps</div></div>
-        <div class="child-card"><div class="child-icon">🤝</div><div class="child-title">Technical Support</div><p class="child-desc">Provided ongoing technical support for professors and international research institutions — diagnosing issues, ensuring uptime, and keeping databases and web services running smoothly.</p><div class="child-badge">Support · Maintenance</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="work-project reveal d2 " id="proj-circomod">
-     <div class="project-header" onclick="toggleProject('proj-circomod')">
-      <div class="project-cover">
-        <img src="https://www.database.industrialecology.uni-freiburg.de/resources/IEF_LogoV_23_3.png" alt="IEDC Logo" onerror="this.parentElement.innerHTML='🏛'" />
-      </div>
-      <div class="project-meta">
-        <div class="project-name">CIRCOMOD</div>
-        <div class="project-org"><span class="project-org-dot"></span>University of Freiburg · IT Department · 2022 – ongoing</div>
-      </div>
-      <div class="project-toggle">+</div>
-    </div>
-    <div class="project-body">
-      <div class="project-summary">
-        <p>The <a href="https://www.industrialecology.uni-freiburg.de/circomod" target="_blank">CIRCOMOD</a> is an EU-funded project. I designed and implemented a visualisation tool for exploring and analysing industrial ecology data.</p>
-      </div>
-      <div class="project-children">
-        <div class="child-card"><div class="child-icon">🗄️</div><div class="child-title">Database Integration</div><p class="child-desc">Maintained and improved the relational database structure powering the IEDC, including dataset tables, lookup tables, classification systems, and data integrity constraints.</p><div class="child-badge">MySQL · .NET Backend</div></div>
-        <div class="child-card"><div class="child-icon">🖥️</div><div class="child-title">Web Interface Development</div><p class="child-desc">Developed and maintained frontend and backend components of the IEDC web application, including data browsing views, catalogue pages, and the portal interface used by international researchers.</p><div class="child-badge">C# · HTML · CSS · JavaScript</div></div>
-        <div class="child-card"><div class="child-icon">🔍</div><div class="child-title">API</div><p class="child-desc">Worked on the database-driven search and filter system, enabling users to query datasets by keyword, data type, material, region, and multiple aspects.</p><div class="child-badge">REST APIs · SQL Queries</div></div>
-        <div class="child-card"><div class="child-icon">🤝</div><div class="child-title">Technical Support</div><p class="child-desc">Provided ongoing technical support for professors and international research institutions — diagnosing issues, ensuring uptime, and keeping databases and web services running smoothly.</p><div class="child-badge">Support · Maintenance</div></div>
-      </div>
-    </div>
-  </div>
-  <div class="work-project reveal d2 " id="proj-visualisation">
-     <div class="project-header" onclick="toggleProject('proj-visualisation')">
-      <div class="project-cover">
-        <img src="https://www.visualisation.industrialecology.uni-freiburg.de/resources/IEF_LogoV_23_3.png" alt="IEDC Logo" onerror="this.parentElement.innerHTML='🏛'" />
-      </div>
-      <div class="project-meta">
-        <div class="project-name">Visualisation Tool</div>
-        <div class="project-org"><span class="project-org-dot"></span>University of Freiburg · IT Department · 2022 – ongoing</div>
-      </div>
-      <div class="project-toggle">+</div>
-    </div>
-    <div class="project-body">
-      <div class="project-summary">
-        <p><a href="https://www.visualisation.industrialecology.uni-freiburg.de/" target="_blank">Circular Sankey web application </a> is an EU-funded project. I designed and implemented a visualisation tool for exploring and analysing industrial ecology data.</p>
-      </div>
-      <div class="project-children">
-        <div class="child-card"><div class="child-icon">🖥️</div><div class="child-title">Web Interface Development</div><p class="child-desc">Developed and maintained frontend and backend components of the IEDC web application, including data browsing views, catalogue pages, and the portal interface used by international researchers.</p><div class="child-badge">C# · HTML · CSS · JavaScript</div></div>
-        <div class="child-card"><div class="child-icon">🔍</div><div class="child-title">API</div><p class="child-desc">Worked on the database-driven search and filter system, enabling users to query datasets by keyword, data type, material, region, and multiple aspects.</p><div class="child-badge">REST APIs · SQL Queries</div></div>
-        <div class="child-card"><div class="child-icon">🤝</div><div class="child-title">Technical Support</div><p class="child-desc">Provided ongoing technical support for professors and international research institutions — diagnosing issues, ensuring uptime, and keeping databases and web services running smoothly.</p><div class="child-badge">Support · Maintenance</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-eyebrow">Who I am</div>
-  <h2 class="section-title reveal">About</h2>
-  <div class="about-layout">
-    <div class="about-bio reveal">
-      <p>A <strong>Full-Stack Developer</strong> with experience building websites and web tools by integrating databases into modern web applications.</p>
-      <p>Experienced in developing efficient digital solutions and using <strong>AI-assisted tools</strong> to improve development workflows and productivity in an <strong>international academic environment</strong>.</p>
-      <p>I work across the full stack — from crafting responsive frontends to architecting backend services — with a focus on clean code, performance, and delivering real value to the people who use what I build.</p>
-      <div style="margin-top: 2rem;"><a href="#contact" class="btn-p">Let's work together ↗</a></div>
-    </div>
-    <div class="about-card reveal d1">
-      <div class="about-row"><span class="row-label">Location</span><span class="row-val"><span class="row-dot"></span>Freiburg, Germany</span></div>
-      <div class="about-row"><span class="row-label">Frontend</span><span class="row-val"><span class="row-dot"></span>HTML · CSS · JS · React</span></div>
-      <div class="about-row"><span class="row-label">Backend</span><span class="row-val"><span class="row-dot"></span>C# / .NET · Python</span></div>
-      <div class="about-row"><span class="row-label">Database</span><span class="row-val"><span class="row-dot"></span>MySQL</span></div>
-      <div class="about-row"><span class="row-label">DevOps</span><span class="row-val"><span class="row-dot"></span>Docker · CI/CD</span></div>
-      <div class="about-row"><span class="row-label">AI Tools</span><span class="row-val"><span class="row-dot"></span>Claude · Codex</span></div>
-      <div class="about-row"><span class="row-label">Environment</span><span class="row-val"><span class="row-dot"></span>Academic · International</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-eyebrow">Get in touch</div>
-  <div class="contact-layout">
-    <div>
-      <h2 class="section-title reveal">Contact</h2>
-      <p class="contact-desc reveal d1">Have a project in mind or want to discuss how I can help? Send me a message and I'll get back to you.</p>
-      <form class="contact-form reveal d2" onsubmit="handleSubmit(event)">
-        <div class="form-row">
-          <div class="form-group"><label>Name</label><input type="text" placeholder="Your name" required /></div>
-          <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com" required /></div>
         </div>
-        <div class="form-group"><label>Subject</label><input type="text" placeholder="What's this about?" /></div>
-        <div class="form-group"><label>Message</label><textarea rows="5" placeholder="Tell me about your project..."></textarea></div>
-        <div><button type="submit" class="btn-p">Send message →</button></div>
-      </form>
-    </div>
-    <div class="contact-info reveal d1" style="padding-top: 0.25rem;">
-      <div style="margin-bottom: 1.5rem;">
-        <p style="font-size: 0.85rem; color: var(--muted); line-height: 1.8;">Based in Freiburg, Germany. Open to remote projects and collaborations worldwide.</p>
       </div>
-      <div class="info-card"><div class="info-icon">📍</div><div><div class="info-label">Location</div><div class="info-val">Freiburg im Breisgau, Germany</div></div></div>
-      <div class="info-card"><div class="info-icon">🏛️</div><div><div class="info-label">Current work</div><div class="info-val">IT Dept., University of Freiburg</div></div></div>
-      <div class="info-card"><div class="info-icon">💼</div><div><div class="info-label">Availability</div><div class="info-val"><span class="avail-dot"></span>Open to new projects</div></div></div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="stat-val">3+</div>
+          <div class="stat-lbl">Years experience</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-val">8</div>
+          <div class="stat-lbl">Services offered</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-val">5+</div>
+          <div class="stat-lbl">Tech stacks</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-val">🌍</div>
+          <div class="stat-lbl">International env.</div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+ <!-- ABOUT -->
+  <section id="about">
+    <div class="section-eyebrow">Who I am</div>
+    <h2 class="section-title reveal">About</h2>
+    <div class="about-layout">
+      <div class="about-bio reveal">
+        <p>A <strong>Full-Stack Developer</strong> with experience building websites and web tools by integrating
+          databases into modern web applications.</p>
+        <p>Experienced in developing efficient digital solutions and using <strong>AI-assisted tools</strong> to improve
+          development workflows and productivity in an <strong>international academic environment</strong>.</p>
+        <p>I work across the full stack — from crafting responsive frontends to architecting backend services — with a
+          focus on clean code, performance, and delivering real value to the people who use what I build.</p>
+        <div style="margin-top: 2rem;"><a href="#contact" class="btn-p">Let's work together ↗</a></div>
+      </div>
+      <div class="about-card reveal d1">
+        <div class="about-row"><span class="row-label">Location</span><span class="row-val"><span
+              class="row-dot"></span>Freiburg, Germany</span></div>
+        <div class="about-row"><span class="row-label">Frontend</span><span class="row-val"><span
+              class="row-dot"></span>HTML · CSS · JS · React</span></div>
+        <div class="about-row"><span class="row-label">Backend</span><span class="row-val"><span
+              class="row-dot"></span>C# / .NET · Python</span></div>
+        <div class="about-row"><span class="row-label">Database</span><span class="row-val"><span
+              class="row-dot"></span>MySQL</span></div>
+        <div class="about-row"><span class="row-label">DevOps</span><span class="row-val"><span
+              class="row-dot"></span>Docker · CI/CD</span></div>
+        <div class="about-row"><span class="row-label">AI Tools</span><span class="row-val"><span
+              class="row-dot"></span>Claude · Codex</span></div>
 
-<!-- FOOTER -->
-<footer>
-  <p class="footer-l">© 2026 <span>Nildem Atasayar</span>. All rights reserved.</p>
-  <div class="footer-r"><span class="avail-dot"></span> Available for work</div>
-</footer>
+      </div>
+    </div>
+  </section>
 
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(el => { if (el.isIntersecting) { el.target.classList.add('visible'); observer.unobserve(el.target); } });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-eyebrow">What I offer</div>
+    <h2 class="section-title reveal">Services</h2>
+    <p class="section-sub reveal d1">A full-stack skill set — from UI to infrastructure.</p>
+    <div class="services-grid reveal d2">
+      <div class="svc-card">
+        <div class="svc-num">01</div>
+        <div class="svc-title">Frontend Development</div>
+        <p class="svc-desc">Responsive, user-friendly interfaces focused on usability and visual consistency.</p>
+        <div class="svc-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span
+            class="tag">JavaScript</span><span class="tag">React</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">02</div>
+        <div class="svc-title">Backend Development</div>
+        <p class="svc-desc">Robust server-side applications handling data flow, authentication, and application
+          structure.</p>
+        <div class="svc-tags"><span class="tag">C#</span><span class="tag">.NET</span><span class="tag">Server-side
+            Logic</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">03</div>
+        <div class="svc-title">Database Integration</div>
+        <p class="svc-desc">Designing and integrating MySQL relational databases for reliable, scalable data management.
+        </p>
+        <div class="svc-tags"><span class="tag">MySQL</span><span class="tag">Relational DB</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">04</div>
+        <div class="svc-title">Microservices & Architecture</div>
+        <p class="svc-desc">Independently deployable services across different stacks within larger backend systems.</p>
+        <div class="svc-tags"><span class="tag">Python</span><span class="tag">Microservices</span><span
+            class="tag">REST APIs</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">05</div>
+        <div class="svc-title">API & Service Integration</div>
+        <p class="svc-desc">Connecting server-side and client-side systems, including web and REST services.</p>
+        <div class="svc-tags"><span class="tag">REST APIs</span><span class="tag">Web Services</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">06</div>
+        <div class="svc-title">DevOps & Deployment</div>
+        <p class="svc-desc">Streamlining delivery with Docker containerisation and CI/CD pipelines.</p>
+        <div class="svc-tags"><span class="tag">Docker</span><span class="tag">CI/CD</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">07</div>
+        <div class="svc-title">Workflow Automation</div>
+        <p class="svc-desc">Custom software solutions that reduce manual tasks and improve team efficiency.</p>
+        <div class="svc-tags"><span class="tag">Automation</span><span class="tag">Custom Tools</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">08</div>
+        <div class="svc-title">Technical Support & Maintenance</div>
+        <p class="svc-desc">Keeping websites and databases running smoothly for stakeholders and institutions.</p>
+        <div class="svc-tags"><span class="tag">Troubleshooting</span><span class="tag">Maintenance</span></div>
+      </div>
+    </div>
+    <div class="ai-strip reveal d3">
+      <div class="ai-strip-icon">✦</div>
+      <p>I integrate AI tools such as <strong>Claude</strong> and <strong>Codex</strong> into my development workflow to
+        accelerate problem-solving, improve code quality, and deliver solutions more efficiently.</p>
+    </div>
+  </section>
 
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
-    navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
-  });
+  <!-- WORK -->
+  <section id="work">
+    <div class="section-eyebrow">Projects</div>
+    <h2 class="section-title reveal">Work</h2>
+    <p class="section-sub reveal d1">Real-world projects I've built and maintained.</p>
 
-  function toggleProject(id) { document.getElementById(id).classList.toggle('open'); }
-  window.addEventListener('DOMContentLoaded', () => { document.getElementById('proj-iedc').classList.add('open'); });
+    <div class="work-project reveal d2" id="proj-iedc">
+      <div class="project-header" onclick="toggleProject('proj-iedc')">
+        <div class="project-cover">
+          <img src="https://www.database.industrialecology.uni-freiburg.de/resources/IEF_LogoV_23_3.png" alt="IEDC Logo"
+            onerror="this.parentElement.innerHTML='🏛'" />
+        </div>
+        <div class="project-meta">
+          <div class="project-name">
+            IEDC — Industrial Ecology Data Commons
+            <a class="project-link" href="https://www.database.industrialecology.uni-freiburg.de/" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.5 8.5L8.5 1.5M8.5 1.5H3.5M8.5 1.5V6.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Visit site
+            </a>
+          </div>
+          <div class="project-org"><span class="project-org-dot"></span>University of Freiburg · Industrial Ecology · 2022 –
+            ongoing</div>
+        </div>
+        <div class="project-toggle">+</div>
+      </div>
+      <div class="project-body">
+        <div class="project-summary">
+          <p>The <a href="https://www.database.industrialecology.uni-freiburg.de/" target="_blank">IEDC</a> is an open
+            science database portal for industrial ecology and socio-metabolic research at the University of Freiburg,
+            hosting 400+ datasets for researchers and institutions worldwide. I contributed across the full stack — from
+            database architecture and backend services to the web interface, search features, deployment, and day-to-day
+            technical support.</p>
+        </div>
+        <div class="project-children">
+          <div class="child-card">
+            <div class="child-icon">🗄️</div>
+            <div class="child-title">Database Architecture & Backend</div>
+            <p class="child-desc">Maintained and improved the relational database structure powering the IEDC, including
+              dataset tables, lookup tables, classification systems, and data integrity constraints.</p>
+            <div class="child-badge">MySQL · .NET Backend</div>
+          </div>
+          <div class="child-card">
+            <div class="child-icon">🖥️</div>
+            <div class="child-title">Web Interface Development</div>
+            <p class="child-desc">Developed and maintained frontend and backend components of the IEDC web application,
+              including data browsing views, catalogue pages, and the portal interface used by international
+              researchers.</p>
+            <div class="child-badge">C# · HTML · CSS · JavaScript</div>
+          </div>
+          <div class="child-card">
+            <div class="child-icon">🔍</div>
+            <div class="child-title">Search & Filter Features</div>
+            <p class="child-desc">Worked on the database-driven search and filter system, enabling users to query
+              datasets by keyword, data type, material, region, and multiple aspects.</p>
+            <div class="child-badge">REST APIs · SQL Queries</div>
+          </div>
+          <div class="child-card">
+            <div class="child-icon">📤</div>
+            <div class="child-title">Data Upload & Validation</div>
+            <p class="child-desc">Supported the data template validation workflow allowing community users to validate
+              and submit datasets against the IEDC data model standards.</p>
+            <div class="child-badge">Data Pipeline · Validation</div>
+          </div>
+          <div class="child-card">
+            <div class="child-icon">🤝</div>
+            <div class="child-title">Technical Support</div>
+            <p class="child-desc">Provided ongoing technical support for professors and international research
+              institutions — diagnosing issues, ensuring uptime, and keeping databases and web services running
+              smoothly.</p>
+            <div class="child-badge">Support · Maintenance</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('button[type="submit"]');
-    btn.textContent = 'Message sent ✓'; btn.style.background = 'var(--accent)';
-    setTimeout(() => { btn.textContent = 'Send message →'; btn.style.background = ''; e.target.reset(); }, 3000);
-  }
-</script>
+    <div class="work-project reveal d2 " id="proj-circomod">
+      <div class="project-header" onclick="toggleProject('proj-circomod')">
+        <div class="project-cover">
+          <img src="https://www.database.industrialecology.uni-freiburg.de/resources/IEF_LogoV_23_3.png" alt="IEDC Logo"
+            onerror="this.parentElement.innerHTML='🏛'" />
+        </div>
+        <div class="project-meta">
+          <div class="project-name">
+            CIRCOMOD
+            <a class="project-link" href="https://www.industrialecology.uni-freiburg.de/circomod" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.5 8.5L8.5 1.5M8.5 1.5H3.5M8.5 1.5V6.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Visit site
+            </a>
+          </div>
+          <div class="project-org"><span class="project-org-dot"></span>University of Freiburg · Industrial Ecology · 2022 –
+            ongoing</div>
+        </div>
+        <div class="project-toggle">+</div>
+      </div>
+      <div class="project-body">
+        <div class="project-summary">
+          <p>The <a href="https://www.industrialecology.uni-freiburg.de/circomod" target="_blank">CIRCOMOD</a> is an
+            EU-funded project. I designed and implemented a visualisation tool for exploring and analysing industrial
+            ecology data.</p>
+        </div>
+        <div class="project-children">
+          <div class="child-card">
+            <div class="child-icon">🗄️</div>
+            <div class="child-title">Database Integration</div>
+            <p class="child-desc">Integrated in-house data sources with the visualisation tool, ensuring seamless data flow.</p>
+            <div class="child-badge">MySQL · .NET Backend</div>
+          </div>
+          <div class="child-card">
+            <div class="child-icon">🖥️</div>
+            <div class="child-title">Web Interface Development</div>
+            <p class="child-desc">Developed the user interface for the visualisation tool, ensuring a responsive and intuitive design.</p>
+            <div class="child-badge">C# · HTML · CSS · JavaScript</div>
+          </div>
+          <div class="child-card">
+            <div class="child-icon">🔍</div>
+            <div class="child-title">API</div>
+            <p class="child-desc">Integrated World Bank APIs to fetch using jQuery AJAX and display relevant economic and environmental data.</p>
+            <div class="child-badge">REST APIs · jQuery</div>
+          </div>
+          <div class="child-card">
+            <div class="child-icon">🤝</div>
+            <div class="child-title">Technical Support</div>
+            <p class="child-desc">Provided ongoing technical support for professors and international research
+              institutions — diagnosing issues, ensuring uptime, and keeping databases and web tools running
+              smoothly for the project.</p>
+            <div class="child-badge">Support · Maintenance</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="work-project reveal d2 " id="proj-visualisation">
+      <div class="project-header" onclick="toggleProject('proj-visualisation')">
+        <div class="project-cover">
+          <img src="https://www.visualisation.industrialecology.uni-freiburg.de/resources/IEF_LogoV_23_3.png"
+            alt="IEDC Logo" onerror="this.parentElement.innerHTML='🏛'" />
+        </div>
+        <div class="project-meta">
+          <div class="project-name">
+            Visualisation Tool
+            <a class="project-link" href="https://www.visualisation.industrialecology.uni-freiburg.de/" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.5 8.5L8.5 1.5M8.5 1.5H3.5M8.5 1.5V6.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Visit site
+            </a>
+          </div>
+          <div class="project-org"><span class="project-org-dot"></span>University of Freiburg · Industrial Ecology · 2022 –
+            ongoing</div>
+        </div>
+        <div class="project-toggle">+</div>
+      </div>
+      <div class="project-body">
+        <div class="project-summary">
+          <p><a href="https://www.visualisation.industrialecology.uni-freiburg.de/" target="_blank">Circular Sankey web
+              application </a> is an EU-funded project. I designed and implemented a visualisation tool for exploring
+            and analysing industrial ecology data.</p>
+        </div>
+        <div class="project-children">
+          <div class="child-card">
+            <div class="child-icon">🖥️</div>
+            <div class="child-title">Web Interface Development</div>
+            <p class="child-desc">Developed a registration and login system for the visualisation tool and user history tracking, ensuring secure user access and data management.</p>
+            <div class="child-badge">C# · HTML · CSS · JavaScript</div>
+          </div>
+          <div class="child-card">
+            <div class="child-icon">🔍</div>
+            <div class="child-title">Database Integration</div>
+            <p class="child-desc">Integrated the visualisation tool with the backend database, ensuring efficient data retrieval and storage.</p>
+            <div class="child-badge">SQL Queries</div>
+          </div>
+          <div class="child-card">
+            <div class="child-icon">🤝</div>
+            <div class="child-title">Technical Support</div>
+            <p class="child-desc">Provided ongoing technical support for professors and international research
+              institutions — diagnosing issues, ensuring uptime, and keeping databases and web tools running
+              smoothly for the project.</p>
+            <div class="child-badge">Support · Maintenance</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="work-project reveal d2 " id="proj-bricomgap">
+      <div class="project-header" onclick="toggleProject('proj-bricomgap')">
+        <div class="project-cover">
+          <img src="https://suite.bricomgap.uni-freiburg.de//_next/image?url=%2Flogos%2Funr-gruen.png&w=128&q=75"
+            alt="UNR Logo" onerror="this.parentElement.innerHTML='🏛'" />
+        </div>
+        <div class="project-meta">
+          <div class="project-name">
+            Bricomgap AI Tool
+            <a class="project-link" href="https://suite.bricomgap.uni-freiburg.de/" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.5 8.5L8.5 1.5M8.5 1.5H3.5M8.5 1.5V6.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Visit site
+            </a>
+          </div>
+          <div class="project-org"><span class="project-org-dot"></span>University of Freiburg · IT Department · 2022 –
+            ongoing</div>
+        </div>
+        <div class="project-toggle">+</div>
+      </div>
+      <div class="project-body">
+        <div class="project-summary">
+          <p><a href="https://suite.bricomgap.uni-freiburg.de/" target="_blank">"Bridging the Communication Gap (BriComGap)"</a> is
+                an AI-powered science communication system for detecting emerging sustainability debates and providing audience-specific research content..</p>
+        </div>
+        <div class="project-children">
+          <div class="child-card">
+            <div class="child-icon">🖥️</div>
+            <div class="child-title">Web Server Installation &amp; Configuration</div>
+            <p class="child-desc">Set up Ubuntu Server environments and optimized web server performance based on
+              project requirements.</p>
+            <div class="child-badge">Linux · Caddy</div>
+          </div>
+
+          <div class="child-card">
+            <div class="child-icon">🔍</div>
+            <div class="child-title">Domain &amp; Security Management</div>
+            <p class="child-desc">Managed domain and subdomain routing while implementing robust SSL/TLS encryption and
+              firewall rules.</p>
+            <div class="child-badge">DNS Records · SSL/TLS · Firewalls</div>
+          </div>
+
+          <div class="child-card">
+            <div class="child-icon">🤝</div>
+            <div class="child-title">Operating System &amp; Remote Access</div>
+            <p class="child-desc">Maintained OS stability through regular updates and configured secure, encrypted
+              remote access protocols.</p>
+            <div class="child-badge">Linux · SSH · Security</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-eyebrow">Get in touch</div>
+    <div class="contact-layout">
+      <div>
+        <h2 class="section-title reveal">Contact</h2>
+        <p class="contact-desc reveal d1">Have a project in mind or want to discuss how I can help? Send me a message
+          and I'll get back to you.</p>
+        <form class="contact-form reveal d2" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group"><label>Name</label><input type="text" placeholder="Your name" required /></div>
+            <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com" required />
+            </div>
+          </div>
+          <div class="form-group"><label>Subject</label><input type="text" placeholder="What's this about?" /></div>
+          <div class="form-group"><label>Message</label><textarea rows="5"
+              placeholder="Tell me about your project..."></textarea></div>
+          <div><button type="submit" class="btn-p">Send message →</button></div>
+        </form>
+      </div>
+      <div class="contact-info reveal d1" style="padding-top: 0.25rem;">
+        <div style="margin-bottom: 1.5rem;">
+          <p style="font-size: 0.85rem; color: var(--muted); line-height: 1.8;">Based in Freiburg, Germany. Open to
+            remote projects and collaborations worldwide.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">📍</div>
+          <div>
+            <div class="info-label">Location</div>
+            <div class="info-val">Freiburg im Breisgau, Germany</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">🏛️</div>
+          <div>
+            <div class="info-label">Current work</div>
+            <div class="info-val">IT Dept., University of Freiburg</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">💼</div>
+          <div>
+            <div class="info-label">Availability</div>
+            <div class="info-val"><span class="avail-dot"></span>Open to new projects</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-l">© 2026 <span>Nildem Atasayar</span>. All rights reserved.</p>
+    <div class="footer-r"><span class="avail-dot"></span> Available for work</div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(el => { if (el.isIntersecting) { el.target.classList.add('visible'); observer.unobserve(el.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
+      navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
+    });
+
+    function toggleProject(id) { document.getElementById(id).classList.toggle('open'); }
+    window.addEventListener('DOMContentLoaded', () => { document.getElementById('proj-iedc').classList.add('open'); });
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const inputs = form.querySelectorAll('input[type="text"]');
+      const name    = inputs[0]?.value.trim() || '';
+      const email   = form.querySelector('input[type="email"]')?.value.trim() || '';
+      const subject = inputs[1]?.value.trim() || '';
+      const message = form.querySelector('textarea')?.value.trim() || '';
+
+      const to = 'n.atasayar@aol.com'; // ← replace with your email address
+      const mailSubject = subject || ('Portfolio enquiry from ' + name);
+      const mailBody = 'Hi Nildem,\n\n' + message + '\n\n---\nFrom: ' + name + '\nReply to: ' + email;
+
+      window.location.href = 'mailto:' + to + '?subject=' + encodeURIComponent(mailSubject) + '&body=' + encodeURIComponent(mailBody);
+    }
+  </script>
 </body>
+
 </html>
