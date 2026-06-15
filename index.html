@@ -16,7 +16,7 @@
       margin: 0;
       padding: 0;
     }
-    
+
     :root {
       --bg: #f7f6f3;
       --bg2: #ffffff;
@@ -757,6 +757,69 @@
         </div>
       </div>
     </div>
+
+
+    <div class="work-project reveal d2" id="proj-labelmatching">
+  <div class="project-header" onclick="toggleProject('proj-labelmatching')">
+    <div class="project-cover">
+      <img src="images/logo-labelmatching.png" alt="LLM Label Matching Logo" onerror="this.parentElement.innerHTML='🏷️'" />
+    </div>
+    <div class="project-meta">
+      <div class="project-name">
+        LLM-Based Label Matching
+        <a class="project-link" href="https://www.database.industrialecology.uni-freiburg.de/labelMatching.aspx" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 8.5L8.5 1.5M8.5 1.5H3.5M8.5 1.5V6.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Visit site
+        </a>
+      </div>
+      <div class="project-org"><span class="project-org-dot"></span>University of Freiburg · Industrial Ecology · 2022 – ongoing</div>
+    </div>
+    <div class="project-toggle">+</div>
+  </div>
+  <div class="project-body">
+    <div class="project-summary">
+      <p>The <a href="https://www.database.industrialecology.uni-freiburg.de/labelMatching.aspx" target="_blank">LLM-Based Label Matching Tool</a> is a semantic search utility built into the IEDC portal, helping researchers match labels from new datasets to standardised IEDC vocabulary. I designed and built the full tool — from the embedding pipeline and binary precomputation to the web interface, batch Excel processing, and result export.</p>
+    </div>
+    <div class="project-children">
+
+      <div class="child-card">
+        <div class="child-icon">🧠</div>
+        <div class="child-title">Semantic Matching Engine</div>
+        <p class="child-desc">Implemented the label matching pipeline using nomic-embed-text embeddings to surface the most semantically similar IEDC labels for any given input.</p>
+        <div class="child-badge">Ollama · NLP · nomic-embed-text</div>
+      </div>
+
+      <div class="child-card">
+        <div class="child-icon">📂</div>
+        <div class="child-title">Batch Processing</div>
+        <p class="child-desc">Implemented an Excel upload workflow that processes entire columns of labels at once, returning a ranked match table downloadable as .xlsx.</p>
+        <div class="child-badge">C# · ASP.NET · Excel</div>
+      </div>
+
+      <div class="child-card">
+        <div class="child-icon">🖥️</div>
+        <div class="child-title">Web Interface Development</div>
+        <p class="child-desc">Designed and developed the full frontend and backend of the tool, including tabbed layout, partial-page updates, loading states, and inline results display.</p>
+        <div class="child-badge">ASP.NET · C# · JavaScript · CSS</div>
+      </div>
+
+      <div class="child-card">
+        <div class="child-icon">🗄️</div>
+        <div class="child-title">Embedding Precomputation</div>
+        <p class="child-desc">Precomputed and serialised vector embeddings for all IEDC labels across six classifications into binary files, keeping query response times fast.</p>
+        <div class="child-badge">Vector Embeddings · Binary Serialisation</div>
+      </div>
+
+      <div class="child-card">
+        <div class="child-icon">✅</div>
+        <div class="child-title">Validation & UX</div>
+        <p class="child-desc">Added input validation, error handling, file format checks, and user-friendly feedback — ensuring the tool degrades gracefully and guides users when something goes wrong.</p>
+        <div class="child-badge">UX · Input Validation · Error Handling</div>
+      </div>
+
+    </div>
+  </div>
+</div>
 
     <div class="work-project reveal d2" id="proj-circomod">
       <div class="project-header" onclick="toggleProject('proj-circomod')">
